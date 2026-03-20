@@ -8,6 +8,28 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
+/* ── HAMBURGER MENU ── */
+const hamburger = document.getElementById('nav-hamburger');
+const navMenu   = document.querySelector('.nav-links');
+if (hamburger && navMenu) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navMenu.classList.toggle('open');
+  });
+  navMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navMenu.classList.remove('open');
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target)) {
+      hamburger.classList.remove('open');
+      navMenu.classList.remove('open');
+    }
+  });
+}
+
 /* ── REVEAL ON SCROLL ── */
 // Atribui delays de stagger uma única vez ao registrar,
 // evitando recálculo bugado a cada interseção.
@@ -71,8 +93,8 @@ document.querySelectorAll('.stat-val').forEach((el) => counterObserver.observe(e
 
   const PARTICLE_COLOR = 'rgba(72, 130, 134, 0.55)';
   const LINE_COLOR     = 'rgba(72, 130, 134, 0.12)';
-  const COUNT          = 55;
-  const MAX_DIST       = 140;
+  const COUNT          = window.innerWidth < 768 ? 28 : 55;
+  const MAX_DIST       = window.innerWidth < 768 ? 100 : 140;
   const MAX_DIST_SQ    = MAX_DIST * MAX_DIST; // evita sqrt quando possível
 
   let W, H, particles;
