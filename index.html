@@ -361,11 +361,12 @@
 
         <!-- Coluna direita: formulário -->
         <div class="contact-form-card">
-          <form action="https://formsubmit.co/duduvelocci@hotmail.com" method="POST" id="contact-form">
-            <input type="hidden" name="_subject" value="Novo contato via Portfólio">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_next" value="https://eduardo-velocci.github.io/portfolio/">
+          <form id="contact-form">
+            <div id="form-success" style="display:none;text-align:center;padding:2rem 0;">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <p style="color:var(--accent);font-size:1.1rem;font-weight:600;margin-bottom:.5rem">Mensagem enviada!</p>
+              <p style="color:var(--text-muted);font-size:.95rem">Obrigado pelo contato. Responderei em breve.</p>
+            </div>
 
             <div class="form-row">
               <div class="form-group">

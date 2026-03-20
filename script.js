@@ -248,3 +248,43 @@ const sectionObserver = new IntersectionObserver(
 );
 
 sections.forEach((s) => sectionObserver.observe(s));
+
+/* ── CONTACT FORM — AJAX ── */
+(function initContactForm() {
+  const form    = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    btn.disabled    = true;
+    btn.textContent = 'Enviando…';
+
+    const data = {
+      name:    form.querySelector('[name="name"]').value,
+      email:   form.querySelector('[name="email"]').value,
+      subject: form.querySelector('[name="subject"]').value || 'Contato via Portfólio',
+      message: form.querySelector('[name="message"]').value,
+    };
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/duduvelocci@hotmail.com', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body:    JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        form.querySelectorAll('.form-group, .form-row, .btn-submit').forEach(el => el.style.display = 'none');
+        success.style.display = 'block';
+      } else {
+        throw new Error();
+      }
+    } catch {
+      btn.disabled    = false;
+      btn.textContent = 'Enviar mensagem';
+      alert('Erro ao enviar. Tente novamente ou entre em contato pelo e-mail duduvelocci@hotmail.com');
+    }
+  });
+})();
